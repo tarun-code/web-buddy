@@ -4,6 +4,13 @@ import ErrorMiddleware from "./middlewares/Error.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from "path";
+
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 config({
   path: "./config/config.env",
 });
@@ -49,10 +56,10 @@ app.use("/api/v1", news);
 
 export default app;
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve("public/index.html"));
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 // app.get("/", (req, res) =>

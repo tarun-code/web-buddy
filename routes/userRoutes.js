@@ -21,7 +21,7 @@ router.route("/login").post(login);
 router.route("/logout").get(logout);
 
 // Get my profile
-router.route("/me").get(isAuthenticated, getMyProfile);
+router.route("/me").get(getMyProfile);
 
 // ChangePassword
 router.route("/changepassword").put(isAuthenticated, changePassword);
